@@ -16,18 +16,22 @@ class CompagnieController {
 
     //put your code here
 
-    private $CompagnieCrud;
+    private $compagnieCrud;
 
     function __construct() {
-        $this->CompagnieCrud = new _Compagnie();
+        $this->compagnieCrud = new _Compagnie();
     }
 
     public function getCompagnieByID($id) {
-        return $this->CompagnieCrud->getCompagnieByID($id);
+        return $this->compagnieCrud->getCompagnieByID($id);
     }
 
     public function getAllCompagnie() {
-        return $this->CompagnieCrud->getAllCompagnies();
+        return $this->compagnieCrud->getAllCompagnies();
+    }
+    
+    public function updateCompagnie($CompagnieObject){
+        $this->compagnieCrud->updateCompagnie($CompagnieObject);
     }
 
 }

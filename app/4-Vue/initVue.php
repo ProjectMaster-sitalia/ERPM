@@ -15,6 +15,8 @@ require 'Composants/NAffilieComponent.php';
 require 'Composants/TeamComponent.php';
 require 'Composants/TypeCompteComponent.php';
 require 'Composants/TypeInterventionComponent.php';
+require 'Composants/DevisComponent.php';
+require 'Composants/DevisLineComponent.php';
 /**
  * Description of initVue
  *
@@ -31,4 +33,6 @@ $NAffilieComponent = new NAffilieComponent();
 $teamComponent = new teamComponent();
 $typeCompteComponent = new typeCompteComponent();
 $typeInterventionComponent = new typeInterventionComponent();
+$devisComponent = new DevisComponent();
+$devisLineComponent = new DevisLineComponent();
 ?>

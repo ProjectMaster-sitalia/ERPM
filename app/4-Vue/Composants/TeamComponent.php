@@ -14,7 +14,7 @@ require_once './3-Controller/TeamController.php';
 require_once './2-Model/Team.php';
 require_once './1-Crud/_Team.php';
 
-class teamComponent {
+class TeamComponent {
 
     //put your code here
 

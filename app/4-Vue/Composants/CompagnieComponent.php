@@ -18,22 +18,22 @@ class CompagnieComponent {
 
     //put your code here
 
-    private $CompagnieController;
-    private $Compagnie;
+    private $compagnieController;
+    private $compagnie;
 
     function __construct() {
 
-        $this->CompagnieController = new CompagnieController();
+        $this->compagnieController = new CompagnieController();
         
     }
 
     public function getCompagnieTestVue($id) {
 
-        $this->Compagnie = $this->CompagnieController->getCompagnieByID($id);
-        if ($this->Compagnie) {
-            var_dump($this->Compagnie);
-            $ID = $this->Compagnie->getID();
-            $adresseFacturation = $this->Compagnie->getAdresseFacturation();
+        $this->compagnie = $this->compagnieController->getCompagnieByID($id);
+        if ($this->compagnie) {
+            var_dump($this->compagnie);
+            $ID = $this->compagnie->getID();
+            $adresseFacturation = $this->compagnie->getAdresseFacturation();
             
             $output = ("<h1>$ID</h1>");
             $output.=("<p>$adresseFacturation</p>");
@@ -43,8 +43,21 @@ class CompagnieComponent {
             return null;
     }
 
-    public function setCompagnieController($CompagnieController) {
-        $this->CompagnieController = $CompagnieController;
+    public function setCompagnieController($compagnieController) {
+        $this->compagnieController = $compagnieController;
+    }
+    
+    public function updateCompagnieTestVue($ID,$manager,$libelle,$logo,$adresseFacturation){
+       
+        $compagnieObject = new Compagnie($ID);
+        $compagnieObject->setManager($manager);
+        $compagnieObject->setLibelle($libelle);
+        $compagnieObject->setLogo($logo);
+        $compagnieObject->setAdresseFacturation($adresseFacturation);
+        
+        $this->compagnie = $this->compagnieController->updateCompagnie($compagnieObject);
+        
+        
     }
 
 }

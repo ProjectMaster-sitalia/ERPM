@@ -16,10 +16,29 @@ class Devis {
     private $ID;
     private $statusDevis;
     private $DevisLines;
+    private $interventionID;
+    private $artisanID;
     
     function __construct($ID) {
         $this->ID = $ID;
     }
+    
+    public function getInterventionID() {
+        return $this->interventionID;
+    }
+    
+    public function getArtisanID() {
+        return $this->artisanID;
+    }
+
+    public function setArtisanID($artisanID) {
+        $this->artisanID = $artisanID;
+    }
+
+        public function setInterventionID($interventionID) {
+        $this->interventionID = $interventionID;
+    }
+
     
     public function getID() {
         return $this->ID;

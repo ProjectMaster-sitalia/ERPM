@@ -118,7 +118,7 @@ class _Compagnie extends DataBaseConnection {
         return null;
     }
     
-    function updateTeam($CompagnieObject){
+    function updateCompagnie($CompagnieObject){
         
          try {
             // INITIALISER LA CONNEXION BDD
@@ -150,12 +150,12 @@ class _Compagnie extends DataBaseConnection {
             $ID = $CompagnieObject->getID();
             
             //On update la table
-            $query = "UPDATE Team SET manager = :manager,libelle = :libelle,logo = :logo,adresseFacturation = :adresse WHERE ID = :id";
+            $query = "UPDATE Compagnie SET manager = :manager,libelle = :libelle,logo = :logo,adresseFacturation = :adresse WHERE ID = :id";
             $request = parent::getBdd()->prepare($query);
             $request->bindParam(':manager', $managerUpdated);
             $request->bindParam(':libelle', $libelleUpdated);
             $request->bindParam(':logo', $logoUpdated);
-            //$request->bindParam(':password', $listeMagasinsUpdated);
+            //$request->bindParam(':listeMagasins', $listeMagasinsUpdated);
             $request->bindParam(':adresse', $AdresseFacturationUpdated);
             $request->bindParam(':id',$ID);
             $request->execute();
