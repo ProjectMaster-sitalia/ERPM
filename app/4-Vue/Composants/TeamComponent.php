@@ -64,6 +64,17 @@ class TeamComponent {
         
     }
 
+    public function deleteTeamTestVue($ID){
+       
+//        $TeamObject = new Team($ID);
+//        $TeamObject->setTypeCompte($newTypeCompte);
+//        $TeamObject->setUser($newUser);
+//        $TeamObject->setPassword($newPassword);
+        
+        $this->team = $this->teamController->deleteTeam($ID);
+        
+    }
+
 }
 
 ?>

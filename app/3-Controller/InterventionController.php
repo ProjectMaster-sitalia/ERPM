@@ -29,6 +29,14 @@ class InterventionController {
     public function getAllIntervention() {
         return $this->InterventionCrud->getAllInterventions();
     }
+    
+    public function updateIntervention($InterventionObject){
+        $this->InterventionCrud->updateIntervention($InterventionObject);
+    }
+    
+    public function deleteIntervention($ID){
+        $this->InterventionCrud->deleteIntervention($ID);
+    }
 
 }
 

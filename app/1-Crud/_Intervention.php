@@ -62,7 +62,7 @@ class _Intervention extends DataBaseConnection {
                     $object->setMagasin($data['magasinID']);
                 }
                 if (isset($data['teamID'])) {
-                    $object->setTeam($data['teamID']);
+                    $object->setIntervention($data['teamID']);
                 }
                 if (isset($data['statusIntervention'])) {
                     $object->setStatus($data['statusIntervention']);
@@ -116,7 +116,7 @@ class _Intervention extends DataBaseConnection {
                 $object->setMagasin($data['magasinID']);
             }
             if (isset($data['teamID'])) {
-                $object->setTeam($data['teamID']);
+                $object->setIntervention($data['teamID']);
             }
             if (isset($data['statusIntervention'])) {
                 $object->setStatus($data['statusIntervention']);
@@ -130,6 +130,78 @@ class _Intervention extends DataBaseConnection {
             error_log($e->getMessage());
         }
         return null;
+    }
+    
+    function updateIntervention($InterventionObject){
+        
+         try {
+            // INITIALISER LA CONNEXION BDD
+            if (is_null(parent::getBdd())) {
+                parent::__construct();
+            }
+            if (!parent::getBdd()->inTransaction()) {
+                parent::getBdd()->beginTransaction();
+            }
+            
+
+            // PREPARER LA SQL QUERY
+            //On récupere l'id du libelle dans la table TypeCompte
+//            $query = "SELECT libelle FROM TypeCompteDefinition WHERE ID = :typeCompte";
+//            $request = parent::getBdd()->prepare($query);
+//            $request->bindParam(':typeCompte', $newTypeCompte);
+//            $request->execute();
+//            $newTypeCompteLibelle = $request->fetch();
+//            $newTypeCompteLibelle = $newTypeCompteLibelle['libelle'];
+            
+//            $request->closeCursor();
+            //echo $newTypeCompte;
+            
+            $typeCompteIDUpdated = $InterventionObject->getTypeCompte();
+            $userUpdated = $InterventionObject->getUser();
+            $passwordUpdated = $InterventionObject->getPassword();
+            $ID = $InterventionObject->getID();
+            
+            //On update la table
+            $query = "UPDATE Intervention SET typeCompteID = :typeCompteID,user = :user,password = :password WHERE ID = :id";
+            $request = parent::getBdd()->prepare($query);
+            $request->bindParam(':typeCompteID', $typeCompteIDUpdated);
+            $request->bindParam(':user', $userUpdated);
+            $request->bindParam(':password', $passwordUpdated);
+            $request->bindParam(':id',$ID);
+            $request->execute();
+            parent::getBdd()->commit();
+            
+            $request->closeCursor();
+            
+                    } catch (Exception $e) {
+            error_log($e->getMessage());
+        }
+    }
+    
+    function deleteIntervention($ID){
+        
+         try {
+            // INITIALISER LA CONNEXION BDD
+            if (is_null(parent::getBdd())) {
+                parent::__construct();
+            }
+            if (!parent::getBdd()->inTransaction()) {
+                parent::getBdd()->beginTransaction();
+            }
+            
+            
+            //On supprime la table
+            $query = "DELETE FROM Intervention WHERE ID = :id";
+            $request = parent::getBdd()->prepare($query);
+            $request->bindParam(':id',$ID);
+            $request->execute();
+            parent::getBdd()->commit();
+            
+            $request->closeCursor();
+            
+                    } catch (Exception $e) {
+            error_log($e->getMessage());
+        }
     }
 
 }

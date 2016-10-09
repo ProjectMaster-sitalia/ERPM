@@ -166,6 +166,32 @@ class _Compagnie extends DataBaseConnection {
             error_log($e->getMessage());
         }
     }
+    
+        function deleteCompagnie($ID){
+        
+         try {
+            // INITIALISER LA CONNEXION BDD
+            if (is_null(parent::getBdd())) {
+                parent::__construct();
+            }
+            if (!parent::getBdd()->inTransaction()) {
+                parent::getBdd()->beginTransaction();
+            }
+            
+            
+            //On supprime la table
+            $query = "DELETE FROM Compagnie WHERE ID = :id";
+            $request = parent::getBdd()->prepare($query);
+            $request->bindParam(':id',$ID);
+            $request->execute();
+            parent::getBdd()->commit();
+            
+            $request->closeCursor();
+            
+                    } catch (Exception $e) {
+            error_log($e->getMessage());
+        }
+    }
 
 }
 

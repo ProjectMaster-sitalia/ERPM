@@ -26,10 +26,24 @@ require_once '4-Vue/initVue.php';
 //        $devisComponent->updateDevisTestVue(1,2,3,1);
 //        echo $devisComponent->getDevisTestVue(1);
 
-          echo $devisLineComponent->getDevisLineTestVue(1);
-//          $devisLineComponent->updateDevisLineTestVue(2,2,"description",20,3,250,2);
-//          echo $devisLineComponent->getDevisTestVue(1);
+//          echo $devisLineComponent->getDevisLineTestVue(1);
+//          $devisLineComponent->updateDevisLineTestVue(1,2,"description",20,3,250,842,3);
+//          echo $devisLineComponent->getDevisLineTestVue(1);
           
+        //$teamComponent->deleteTeamTestVue();
+//        $affilieComponent->deleteAffilieTestVue(1);
+        //$compagnieComponent->deleteCompagnieTestVue();
+//        $facturationArtisanComponent->deleteFacturationArtisanTestVue(1);
+        $interventionComponent->deleteInterventionTestVue();
+//        $magasinComponent->deleteMagasinTestVue(1);
+//        $mailsComponent->deleteMailsTestVue(1);
+//        $mediaComponent->deleteMediaTestVue(1);
+//        $nAffilieComponent->deleteNAffilieTestVue(1);
+//        $teamComponent->deleteTeamTestVue(1);
+//        $typeCompteComponent->deleteTypeCompteTestVue(1);
+//        $typeInterventionComponent->deleteTypeInterventionTestVue(1);
+//        $devisComponent->deleteDevisTestVue(1);
+//        $devisLineComponent->deleteDevisLineTestVue(1);
         ?>
     </body>
 </html>

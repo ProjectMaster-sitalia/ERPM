@@ -59,6 +59,18 @@ class CompagnieComponent {
         
         
     }
+    
+    
+    public function deleteCompagnieTestVue($ID){
+       
+//        $CompagnieObject = new Compagnie($ID);
+//        $CompagnieObject->setTypeCompte($newTypeCompte);
+//        $CompagnieObject->setUser($newUser);
+//        $CompagnieObject->setPassword($newPassword);
+        
+        $this->compagnie = $this->compagnieController->deleteCompagnie($ID);
+        
+    }
 
 }
 

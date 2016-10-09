@@ -26,6 +26,51 @@ class Intervention {
     private $status;
     private $magasin;
 
+
+    function __construct($ID) {
+        $this->ID = $ID;
+    }
+
+    public function getID() {
+        return $this->ID;
+    }
+
+    public function setID($ID) {
+        $this->ID = $ID;
+    }
+
+    public function getClient() {
+        return $this->client;
+    }
+
+    public function setClient($client) {
+        $this->client = $client;
+    }
+
+    public function getartisans() {
+        return $this->artisans;
+    }
+
+    public function setartisans($artisans) {
+        $this->artisans = $artisans;
+    }
+
+    public function getMails() {
+        return $this->mails;
+    }
+
+    public function setMails($mails) {
+        $this->mails = $mails;
+    }
+
+    public function getTeam() {
+        return $this->team;
+    }
+
+    public function setTeam($team) {
+        $this->team = $team;
+    }
+    
     public function getMagasin() {
         return $this->magasin;
     }
@@ -79,50 +124,6 @@ class Intervention {
 
     public function setFacturationClient($facturationClient) {
         $this->facturationClient = $facturationClient;
-    }
-
-    function __construct($ID) {
-        $this->ID = $ID;
-    }
-
-    public function getID() {
-        return $this->ID;
-    }
-
-    public function setID($ID) {
-        $this->ID = $ID;
-    }
-
-    public function getClient() {
-        return $this->client;
-    }
-
-    public function setClient($client) {
-        $this->client = $client;
-    }
-
-    public function getartisans() {
-        return $this->artisans;
-    }
-
-    public function setartisans($artisans) {
-        $this->artisans = $artisans;
-    }
-
-    public function getMails() {
-        return $this->mails;
-    }
-
-    public function setMails($mails) {
-        $this->mails = $mails;
-    }
-
-    public function getTeam() {
-        return $this->team;
-    }
-
-    public function setTeam($team) {
-        $this->team = $team;
     }
 
 }

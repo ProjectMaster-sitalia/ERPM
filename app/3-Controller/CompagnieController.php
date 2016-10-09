@@ -33,6 +33,10 @@ class CompagnieController {
     public function updateCompagnie($CompagnieObject){
         $this->compagnieCrud->updateCompagnie($CompagnieObject);
     }
+    
+    public function deleteCompagnie($ID){
+        $this->compagnieCrud->deleteCompagnie($ID);
+    }
 
 }
 

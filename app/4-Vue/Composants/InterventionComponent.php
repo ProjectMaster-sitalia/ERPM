@@ -18,21 +18,21 @@ class InterventionComponent {
 
     //put your code here
 
-    private $InterventionController;
-    private $Intervention;
+    private $interventionController;
+    private $intervention;
 
     function __construct() {
 
-        $this->InterventionController = new InterventionController();
+        $this->interventionController = new InterventionController();
     }
 
     public function getInterventionTestVue($id) {
 
-        $this->Intervention = $this->InterventionController->getInterventionByID($id);
-        if ($this->Intervention) {
-            var_dump($this->Intervention);
-            $ID = $this->Intervention->getID();
-            $dateReception = $this->Intervention->getDateReception();
+        $this->intervention = $this->interventionController->getInterventionByID($id);
+        if ($this->intervention) {
+            var_dump($this->intervention);
+            $ID = $this->intervention->getID();
+            $dateReception = $this->intervention->getDateReception();
             
             $output = ("<h1>$ID</h1>");
             $output.=("<p>$dateReception</p>");
@@ -42,8 +42,30 @@ class InterventionComponent {
             return null;
     }
 
-    public function setInterventionController($InterventionController) {
-        $this->InterventionController = $InterventionController;
+    public function setInterventionController($interventionController) {
+        $this->interventionController = $interventionController;
+    }
+    
+    public function updateInterventionTestVue(/*$ID,$newTypeCompte,$newUser,$newPassword*/){
+       
+//        $interventionObject = new Intervention($ID);
+//        $interventionObject->setTypeCompte($newTypeCompte);
+//        $interventionObject->setUser($newUser);
+//        $interventionObject->setPassword($newPassword);
+        
+        $this->intervention = $this->interventionController->updateIntervention($interventionObject);
+        
+    }
+
+    public function deleteInterventionTestVue($ID){
+       
+//        $interventionObject = new Intervention($ID);
+//        $interventionObject->setTypeCompte($newTypeCompte);
+//        $interventionObject->setUser($newUser);
+//        $interventionObject->setPassword($newPassword);
+        
+        $this->intervention = $this->interventionController->deleteIntervention($ID);
+        
     }
 
 }
