@@ -99,12 +99,6 @@ class _Team extends DataBaseConnection {
                 $typeCompte = $typeCompte->getTypeCompteByID($data['typeCompteID']);
                 $object->setTypeCompte($typeCompte);
                 
-//                $object->setTypeCompte($data['typeCompteID']);
-//                $query = "SELECT libelle FROM TypeCompte WHERE ID = :id";
-//                $request = parent::getBdd()->prepare($query);
-//                $request->bindParam(':id', $data['typeCompteID']);
-//                $request->execute();
-//                $data = $request->fetch();
             }
             if (isset($data['user'])) {
                 $object->setUser($data['user']);
@@ -132,19 +126,6 @@ class _Team extends DataBaseConnection {
                 parent::getBdd()->beginTransaction();
             }
             
-
-            // PREPARER LA SQL QUERY
-            //On récupere l'id du libelle dans la table TypeCompte
-//            $query = "SELECT libelle FROM TypeCompteDefinition WHERE ID = :typeCompte";
-//            $request = parent::getBdd()->prepare($query);
-//            $request->bindParam(':typeCompte', $newTypeCompte);
-//            $request->execute();
-//            $newTypeCompteLibelle = $request->fetch();
-//            $newTypeCompteLibelle = $newTypeCompteLibelle['libelle'];
-            
-//            $request->closeCursor();
-            //echo $newTypeCompte;
-            
             $typeCompteIDUpdated = $TeamObject->getTypeCompte();
             $userUpdated = $TeamObject->getUser();
             $passwordUpdated = $TeamObject->getPassword();
@@ -156,6 +137,39 @@ class _Team extends DataBaseConnection {
             $request->bindParam(':typeCompteID', $typeCompteIDUpdated);
             $request->bindParam(':user', $userUpdated);
             $request->bindParam(':password', $passwordUpdated);
+            $request->bindParam(':id',$ID);
+            $request->execute();
+            parent::getBdd()->commit();
+            
+            $request->closeCursor();
+            
+                    } catch (Exception $e) {
+            error_log($e->getMessage());
+        }
+    }
+    
+    function addteam($teamObject){
+        
+         try {
+            // INITIALISER LA CONNEXION BDD
+            if (is_null(parent::getBdd())) {
+                parent::__construct();
+            }
+            if (!parent::getBdd()->inTransaction()) {
+                parent::getBdd()->beginTransaction();
+            }
+
+            $typeCompteID = $teamObject->getTypeCompte();
+            $user = $teamObject->getUser();
+            $password = $teamObject->getPassword();
+            $ID = $teamObject->getID();
+            
+            //On update la table
+            $query = "INSERT INTO Team VALUES(:id,:typeCompteID,:user,:password)";
+            $request = parent::getBdd()->prepare($query);
+            $request->bindParam(':typeCompteID', $typeCompteID);
+            $request->bindParam(':user', $user);
+            $request->bindParam(':password', $password);
             $request->bindParam(':id',$ID);
             $request->execute();
             parent::getBdd()->commit();

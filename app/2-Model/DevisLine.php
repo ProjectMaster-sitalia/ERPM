@@ -14,13 +14,13 @@ class DevisLine {
     //put your code here
     
     private $ID;
-    private $devisID;
+    private $devis;
     private $description;
     private $unite;
     private $prixUnitaire;
     private $quantite;
     private $prixHT;
-    private $typeInterventionID;
+    private $typeIntervention;
     
     function __construct($ID) {
         $this->ID = $ID;
@@ -30,8 +30,8 @@ class DevisLine {
         return $this->ID;
     }
 
-    public function getDevisID() {
-        return $this->devisID;
+    public function getDevis() {
+        return $this->devis;
     }
 
     public function getDescription() {
@@ -54,16 +54,16 @@ class DevisLine {
         return $this->prixHT;
     }
 
-    public function getTypeInterventionID() {
-        return $this->typeInterventionID;
+    public function getTypeIntervention() {
+        return $this->typeIntervention;
     }
 
     public function setID($ID) {
         $this->ID = $ID;
     }
 
-    public function setDevisID($devisID) {
-        $this->devisID = $devisID;
+    public function setDevis($devis) {
+        $this->devis = $devis;
     }
 
     public function setDescription($description) {
@@ -86,8 +86,8 @@ class DevisLine {
         $this->prixHT = $prixHT;
     }
 
-    public function setTypeInterventionID($typeInterventionID) {
-        $this->typeInterventionID = $typeInterventionID;
+    public function setTypeIntervention($typeIntervention) {
+        $this->typeIntervention = $typeIntervention;
     }
 
 

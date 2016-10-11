@@ -53,6 +53,16 @@ class TeamComponent {
         $this->teamController = $teamController;
     }
     
+    public function addTeamTestVue($ID,$typeCompteID,$user,$password){
+       
+        $teamObject = new Team($ID);
+        $teamObject->setTypeCompte($typeCompteID);
+        $teamObject->setUser($user);
+        $teamObject->setPassword($password);
+        
+        $this->teamController->addTeam($teamObject);       
+    }
+    
     public function updateTeamTestVue($ID,$newTypeCompte,$newUser,$newPassword){
        
         $TeamObject = new Team($ID);
@@ -60,19 +70,13 @@ class TeamComponent {
         $TeamObject->setUser($newUser);
         $TeamObject->setPassword($newPassword);
         
-        $this->team = $this->teamController->updateTeam($TeamObject);
+        $this->teamController->updateTeam($TeamObject);
         
     }
 
     public function deleteTeamTestVue($ID){
-       
-//        $TeamObject = new Team($ID);
-//        $TeamObject->setTypeCompte($newTypeCompte);
-//        $TeamObject->setUser($newUser);
-//        $TeamObject->setPassword($newPassword);
         
-        $this->team = $this->teamController->deleteTeam($ID);
-        
+        $this->teamController->deleteTeam($ID);  
     }
 
 }

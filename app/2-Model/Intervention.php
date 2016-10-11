@@ -17,14 +17,14 @@ class Intervention {
     private $ID;
     private $dateReception;
     private $dateIntervention;
-    private $client;
+    private $team;
+    private $status;
+    private $magasin;
+
     private $artisans;
     private $facturationsArtisans;
     private $facturationClient;
     private $mails;
-    private $team;
-    private $status;
-    private $magasin;
 
 
     function __construct($ID) {
@@ -37,14 +37,6 @@ class Intervention {
 
     public function setID($ID) {
         $this->ID = $ID;
-    }
-
-    public function getClient() {
-        return $this->client;
-    }
-
-    public function setClient($client) {
-        $this->client = $client;
     }
 
     public function getartisans() {

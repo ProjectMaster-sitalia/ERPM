@@ -128,19 +128,6 @@ class _Compagnie extends DataBaseConnection {
             if (!parent::getBdd()->inTransaction()) {
                 parent::getBdd()->beginTransaction();
             }
-            
-
-            // PREPARER LA SQL QUERY
-            //On récupere l'id du libelle dans la table TypeCompte
-//            $query = "SELECT libelle FROM TypeCompteDefinition WHERE ID = :typeCompte";
-//            $request = parent::getBdd()->prepare($query);
-//            $request->bindParam(':typeCompte', $newTypeCompte);
-//            $request->execute();
-//            $newTypeCompteLibelle = $request->fetch();
-//            $newTypeCompteLibelle = $newTypeCompteLibelle['libelle'];
-            
-//            $request->closeCursor();
-            //echo $newTypeCompte;
 
             $managerUpdated = $CompagnieObject->getManager();
             $libelleUpdated = $CompagnieObject->getLibelle();
@@ -150,15 +137,53 @@ class _Compagnie extends DataBaseConnection {
             $ID = $CompagnieObject->getID();
             
             //On update la table
-            $query = "UPDATE Compagnie SET manager = :manager,libelle = :libelle,logo = :logo,adresseFacturation = :adresse WHERE ID = :id";
+            $query = "UPDATE Compagnie SET manager = :manager,libelle = :libelle,logo = :logo,adresseFacturation = :adresseFacturation WHERE ID = :id";
             $request = parent::getBdd()->prepare($query);
             $request->bindParam(':manager', $managerUpdated);
             $request->bindParam(':libelle', $libelleUpdated);
             $request->bindParam(':logo', $logoUpdated);
             //$request->bindParam(':listeMagasins', $listeMagasinsUpdated);
-            $request->bindParam(':adresse', $AdresseFacturationUpdated);
+            $request->bindParam(':adresseFacturation', $AdresseFacturationUpdated);
             $request->bindParam(':id',$ID);
             $request->execute();
+            parent::getBdd()->commit();
+            
+            $request->closeCursor();
+            
+                    } catch (Exception $e) {
+            error_log($e->getMessage());
+        }
+    }
+    
+    function addCompagnie($CompagnieObject){
+        
+         try {
+            // INITIALISER LA CONNEXION BDD
+            if (is_null(parent::getBdd())) {
+                parent::__construct();
+            }
+            if (!parent::getBdd()->inTransaction()) {
+                parent::getBdd()->beginTransaction();
+            }
+
+            $managerUpdated = $CompagnieObject->getManager();
+            $libelleUpdated = $CompagnieObject->getLibelle();
+            $logoUpdated = $CompagnieObject->getLogo();
+            //$listeMagasinsUpdated = $CompagnieObject->getListeMagasins();
+            $AdresseFacturationUpdated = $CompagnieObject->getAdresseFacturation();
+            $ID = $CompagnieObject->getID();
+            
+            //On update la table
+            $query = "INSERT INTO Compagnie VALUES(:id,:manager,:libelle,:logo,:adresseFacturation)";
+            $request = parent::getBdd()->prepare($query);
+            $request->bindParam(':manager', $managerUpdated);
+            $request->bindParam(':libelle', $libelleUpdated);
+            $request->bindParam(':logo', $logoUpdated);
+            //$request->bindParam(':listeMagasins', $listeMagasinsUpdated);
+            $request->bindParam(':adresseFacturation', $AdresseFacturationUpdated);
+            $request->bindParam(':id',$ID);
+            $request->execute();
+            parent::getBdd()->commit();
             
             $request->closeCursor();
             

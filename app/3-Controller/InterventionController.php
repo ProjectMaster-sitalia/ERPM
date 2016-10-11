@@ -30,6 +30,9 @@ class InterventionController {
         return $this->InterventionCrud->getAllInterventions();
     }
     
+    public function addIntervention($InterventionObject){
+        $this->InterventionCrud->addIntervention($InterventionObject);
+    }
     public function updateIntervention($InterventionObject){
         $this->InterventionCrud->updateIntervention($InterventionObject);
     }

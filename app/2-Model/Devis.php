@@ -16,27 +16,27 @@ class Devis {
     private $ID;
     private $statusDevis;
     private $DevisLines;
-    private $interventionID;
-    private $artisanID;
+    private $intervention;
+    private $artisan;
     
     function __construct($ID) {
         $this->ID = $ID;
     }
     
-    public function getInterventionID() {
-        return $this->interventionID;
+    public function getIntervention() {
+        return $this->intervention;
     }
     
-    public function getArtisanID() {
-        return $this->artisanID;
+    public function getArtisan() {
+        return $this->artisan;
     }
 
-    public function setArtisanID($artisanID) {
-        $this->artisanID = $artisanID;
+    public function setArtisan($artisan) {
+        $this->artisan = $artisan;
     }
 
-        public function setInterventionID($interventionID) {
-        $this->interventionID = $interventionID;
+        public function setIntervention($intervention) {
+        $this->intervention = $intervention;
     }
 
     

@@ -36,16 +36,16 @@ class NAffilie extends Magasin {
         return parent::getAdressePhysique();
     }
 
-    public function getCompanieID() {
-        return parent::getCompanieID();
+    public function getCompagnie() {
+        return parent::getCompagnie();
     }
 
     public function setAdressePhysique($adressePhysique) {
         parent::setAdressePhysique($adressePhysique);
     }
 
-    public function setCompanieID($companieID) {
-        parent::setCompanieID($companieID);
+    public function setCompagnie($compagnieID) {
+        parent::setCompagnie($compagnieID);
     }
 
     public function setAdresseFacturation($adresseFacturation) {

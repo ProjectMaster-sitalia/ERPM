@@ -15,7 +15,7 @@ class Magasin {
     //put your code here
     private $ID;
     private $adresseFacturation;
-    private $companieID;
+    private $compagnie;
     private $adressePhysique;
 
     function __construct($ID) {
@@ -38,12 +38,12 @@ class Magasin {
         $this->adresseFacturation = $adresseFacturation;
     }
 
-    public function getCompanieID() {
-        return $this->companieID;
+    public function getCompagnie() {
+        return $this->compagnie;
     }
 
-    public function setCompanieID($companieID) {
-        $this->companieID = $companieID;
+    public function setCompagnie($compagnie) {
+        $this->compagnie = $compagnie;
     }
 
     public function getAdressePhysique() {

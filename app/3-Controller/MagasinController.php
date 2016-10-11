@@ -29,6 +29,18 @@ class MagasinController {
     public function getAllMagasin() {
         return $this->MagasinCrud->getAllMagasins();
     }
+    
+    public function updateMagasin($magasinObject){
+        $this->MagasinCrud->updateMagasin($magasinObject);
+    }
+    
+    public function addMagasin($magasinObject){
+        $this->MagasinCrud->addMagasin($magasinObject);
+    }
+    
+    public function deleteMagasin($ID){
+        $this->MagasinCrud->deleteMagasin($ID);
+    }
 
 }
 

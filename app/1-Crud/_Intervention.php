@@ -58,8 +58,8 @@ class _Intervention extends DataBaseConnection {
                     $myFormatForView = dateIntervention("m/d/y g:i A", $time);
                     $object->setDateIntervention($myFormatForView);
                 }
-                if (isset($data['magasinID'])) {
-                    $object->setMagasin($data['magasinID']);
+                if (isset($data['interventionID'])) {
+                    $object->setIntervention($data['interventionID']);
                 }
                 if (isset($data['teamID'])) {
                     $object->setIntervention($data['teamID']);
@@ -104,25 +104,33 @@ class _Intervention extends DataBaseConnection {
             $object = new Intervention($data['ID']);
             if (isset($data['dateReception'])) {
                 $time = strtotime($data['dateReception']);
-                $myFormatForView = dateReception("m/d/y g:i A", $time);
+                $myFormatForView = date("m/d/y g:i A", $time);
                 $object->setDateReception($myFormatForView);
             }
             if (isset($data['dateIntervention'])) {
                 $time = strtotime($data['dateIntervention']);
-                $myFormatForView = dateIntervention("m/d/y g:i A", $time);
+                $myFormatForView = date("m/d/y g:i A", $time);
                 $object->setDateIntervention($myFormatForView);
             }
             if (isset($data['magasinID'])) {
-                $object->setMagasin($data['magasinID']);
+                $magasin = new _Magasin();
+                $magasin = $magasin->getMagasinByID($data['magasinID']);
+                $object->setMagasin($magasin);
             }
             if (isset($data['teamID'])) {
-                $object->setIntervention($data['teamID']);
+                $team = new _Team();
+                $team = $team->getTeamByID($data['teamID']);
+                $object->setTeam($team);
             }
             if (isset($data['statusIntervention'])) {
-                $object->setStatus($data['statusIntervention']);
+                $query = "SELECT libelle FROM InterventionStatusDefinition WHERE ID = :id";
+                $request = parent::getBdd()->prepare($query);
+                // MAPPER L'ID
+                $request->bindParam(':id', $data['statusIntervention']);
+                $request->execute();
+                $data = $request->fetch();
+                $object->setStatus($data['libelle']);
             }
-
-
 
             $request->closeCursor();
             return $object;
@@ -132,7 +140,7 @@ class _Intervention extends DataBaseConnection {
         return null;
     }
     
-    function updateIntervention($InterventionObject){
+    function addIntervention($interventionObject){
         
          try {
             // INITIALISER LA CONNEXION BDD
@@ -142,31 +150,59 @@ class _Intervention extends DataBaseConnection {
             if (!parent::getBdd()->inTransaction()) {
                 parent::getBdd()->beginTransaction();
             }
-            
 
-            // PREPARER LA SQL QUERY
-            //On récupere l'id du libelle dans la table TypeCompte
-//            $query = "SELECT libelle FROM TypeCompteDefinition WHERE ID = :typeCompte";
-//            $request = parent::getBdd()->prepare($query);
-//            $request->bindParam(':typeCompte', $newTypeCompte);
-//            $request->execute();
-//            $newTypeCompteLibelle = $request->fetch();
-//            $newTypeCompteLibelle = $newTypeCompteLibelle['libelle'];
-            
-//            $request->closeCursor();
-            //echo $newTypeCompte;
-            
-            $typeCompteIDUpdated = $InterventionObject->getTypeCompte();
-            $userUpdated = $InterventionObject->getUser();
-            $passwordUpdated = $InterventionObject->getPassword();
-            $ID = $InterventionObject->getID();
+            $dateReception = $interventionObject->getDateReception();
+            $dateIntervention= $interventionObject->getDateIntervention();
+            $magasinID= $interventionObject->getMagasin();
+            $teamID = $interventionObject->getTeam();
+            $statusIntervention = $interventionObject->getStatus();
+            $ID = $interventionObject->getID();
             
             //On update la table
-            $query = "UPDATE Intervention SET typeCompteID = :typeCompteID,user = :user,password = :password WHERE ID = :id";
+            $query = "INSERT INTO Intervention VALUES(:id,:dateReception,:dateIntervention,:magasinID,:teamID,:statusIntervention)";
             $request = parent::getBdd()->prepare($query);
-            $request->bindParam(':typeCompteID', $typeCompteIDUpdated);
-            $request->bindParam(':user', $userUpdated);
-            $request->bindParam(':password', $passwordUpdated);
+            $request->bindParam(':dateReception', $dateReception);
+            $request->bindParam(':dateIntervention', $dateIntervention);
+            $request->bindParam(':magasinID', $magasinID);
+            $request->bindParam(':teamID', $teamID);
+            $request->bindParam(':statusIntervention', $statusIntervention);
+            $request->bindParam(':id',$ID);
+            $request->execute();
+            parent::getBdd()->commit();
+            
+            $request->closeCursor();
+            
+                    } catch (Exception $e) {
+            error_log($e->getMessage());
+        }
+    }
+    
+    function updateIntervention($interventionObject){
+        
+         try {
+            // INITIALISER LA CONNEXION BDD
+            if (is_null(parent::getBdd())) {
+                parent::__construct();
+            }
+            if (!parent::getBdd()->inTransaction()) {
+                parent::getBdd()->beginTransaction();
+            }
+
+            $dateReception = $interventionObject->getDateReception();
+            $dateIntervention= $interventionObject->getDateIntervention();
+            $magasinID= $interventionObject->getMagasin();
+            $teamID = $interventionObject->getTeam();
+            $statusIntervention = $interventionObject->getStatus();
+            $ID = $interventionObject->getID();
+            
+            //On update la table
+            $query = "UPDATE Intervention SET dateReception = :dateReception,dateIntervention = :dateIntervention,magasinID = :magasinID,teamID = :teamID,statusIntervention = :statusIntervention WHERE ID = :id";
+            $request = parent::getBdd()->prepare($query);
+            $request->bindParam(':dateReception', $dateReception);
+            $request->bindParam(':dateIntervention', $dateIntervention);
+            $request->bindParam(':magasinID', $magasinID);
+            $request->bindParam(':teamID', $teamID);
+            $request->bindParam(':statusIntervention', $statusIntervention);
             $request->bindParam(':id',$ID);
             $request->execute();
             parent::getBdd()->commit();

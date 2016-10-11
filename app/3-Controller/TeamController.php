@@ -34,6 +34,10 @@ class TeamController {
         $this->TeamCrud->updateTeam($TeamObject);
     }
     
+    public function addTeam($teamObject){
+        $this->TeamCrud->addTeam($teamObject);
+    }
+    
     public function deleteTeam($ID){
         $this->TeamCrud->deleteTeam($ID);
     }

@@ -33,10 +33,16 @@ class CompagnieComponent {
         if ($this->compagnie) {
             var_dump($this->compagnie);
             $ID = $this->compagnie->getID();
+            $manager = $this->compagnie->getManager();
+            $libelle = $this->compagnie->getLibelle();
+            $logo = $this->compagnie->getLogo();
             $adresseFacturation = $this->compagnie->getAdresseFacturation();
             
-            $output = ("<h1>$ID</h1>");
-            $output.=("<p>$adresseFacturation</p>");
+            $output = ("<h1>ID Compagnie : $ID</h1>");
+            $output.=("<p>manager : $manager</p>");
+            $output.=("<p>libelle : $libelle</p>");
+            $output.=("<p>logo : $logo</p>");
+            $output.=("<p>adresse facturation : $adresseFacturation</p>");
             return $output;
         }
         else
@@ -47,6 +53,19 @@ class CompagnieComponent {
         $this->compagnieController = $compagnieController;
     }
     
+    public function addCompagnieTestVue($ID,$manager,$libelle,$logo,$adresseFacturation){
+       
+        $compagnieObject = new Compagnie($ID);
+        $compagnieObject->setManager($manager);
+        $compagnieObject->setLibelle($libelle);
+        $compagnieObject->setLogo($logo);
+        $compagnieObject->setAdresseFacturation($adresseFacturation);
+        
+        $this->compagnieController->addCompagnie($compagnieObject);
+        
+        
+    }
+    
     public function updateCompagnieTestVue($ID,$manager,$libelle,$logo,$adresseFacturation){
        
         $compagnieObject = new Compagnie($ID);
@@ -55,20 +74,15 @@ class CompagnieComponent {
         $compagnieObject->setLogo($logo);
         $compagnieObject->setAdresseFacturation($adresseFacturation);
         
-        $this->compagnie = $this->compagnieController->updateCompagnie($compagnieObject);
+        $this->compagnieController->updateCompagnie($compagnieObject);
         
         
     }
     
     
     public function deleteCompagnieTestVue($ID){
-       
-//        $CompagnieObject = new Compagnie($ID);
-//        $CompagnieObject->setTypeCompte($newTypeCompte);
-//        $CompagnieObject->setUser($newUser);
-//        $CompagnieObject->setPassword($newPassword);
         
-        $this->compagnie = $this->compagnieController->deleteCompagnie($ID);
+        $this->compagnieController->deleteCompagnie($ID);
         
     }
 
