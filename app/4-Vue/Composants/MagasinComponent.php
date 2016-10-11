@@ -63,7 +63,7 @@ class MagasinComponent {
         
         $this->magasinController->updateMagasin($magasinObject);
         
-    }
+    } 
     
     public function addMagasinTestVue($ID,$adresseFacturation,$compagnieID,$adressePhysique){
        

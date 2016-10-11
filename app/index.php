@@ -60,18 +60,19 @@ require_once '4-Vue/initVue.php';
 //        //delete
 //        $interventionComponent->deleteInterventionTestVue(2);
 //        /*Intervention*/
-//        
-//        
-//        Tout est fait et testé jusqu'ici
-//        
-//        
-//        
+//          
 //        /* Devis */
-//        $devisComponent->addDevisTestVue(1);
-//        echo $devisComponent->getDevisTestVue(1);
-//        $devisComponent->updateDevisTestVue(1);
-//        $devisComponent->deleteDevisTestVue(1);
+//        $devisComponent->addDevisTestVue(6,3,1,25);//statusDevis,interventionID,ArtisanID
+//        echo $devisComponent->getDevisTestVue(5);
+//        $devisComponent->updateDevisTestVue(5,2,2,80);
+//        echo $devisComponent->getDevisTestVue(5);
+//        $devisComponent->deleteDevisTestVue(6);
 //        /*Devis*/
+//        
+//        
+//        //        Tout est fait et testé jusqu'ici
+//        
+//        
 //        
 //        /* DevisLine */
 //        $devisLineComponent->addDevisLineTestVue(1);

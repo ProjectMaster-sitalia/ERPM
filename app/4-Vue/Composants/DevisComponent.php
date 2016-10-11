@@ -34,13 +34,17 @@ class DevisComponent {
             var_dump($this->devis);
             $ID = $this->devis->getID();
             $statusDevis = $this->devis->getStatusDevis();
-            $InterventionID = $this->devis->getInterventionID();
-            $artisanID = $this->devis->getArtisanID();
             
-            $output = ("<h1>$ID</h1>");
+            $intervention = $this->devis->getIntervention();
+            $interventionComponent = new InterventionComponent();
+            $outputIntervention = $interventionComponent->getInterventionTestVue($intervention->getID());
+
+            //$artisan = $this->devis->getArtisan(); //on attend de ramener la bdd de mastore
+            
+            $output = ("<h1>Devis ID : $ID</h1>");
             $output.=("<p>$statusDevis</p>");
-            $output.=("<p>$InterventionID</p>");
-            $output.=("<p>$artisanID</p>");
+            $output.=("<div style='margin-left:100px;'>$outputIntervention</div>");
+
             return $output;
         }
         else
@@ -51,17 +55,32 @@ class DevisComponent {
         $this->devisController = $devisController;
     }
     
-    public function updateDevisTestVue($ID,$statusDevisUpdated,$interventionIDUpdated,$artisanIDUpdated){
+    public function addDevisTestVue($ID,$statusDevis,$interventionID,$artisanID){
        
         $devisObject = new Devis($ID);
-        $devisObject->setStatusDevis($statusDevisUpdated);
-        $devisObject->setInterventionID($interventionIDUpdated);
-        $devisObject->setArtisanID($artisanIDUpdated);
+        $devisObject->setStatusDevis($statusDevis);
+        $devisObject->setIntervention($interventionID);
+        $devisObject->setArtisan($artisanID);
         
-        $this->devis = $this->devisController->updateDevis($devisObject);
+        $this->devisController->addDevis($devisObject);
         
         
     }
+    
+    public function updateDevisTestVue($ID,$statusDevis,$interventionID,$artisanID){
+       
+        $devisObject = new Devis($ID);
+        $devisObject->setStatusDevis($statusDevis);
+        $devisObject->setIntervention($interventionID);
+        $devisObject->setArtisan($artisanID);
+        
+        $this->devisController->updateDevis($devisObject);  
+    }
 
+    public function deleteDevisTestVue($ID){
+        
+        $this->devisController->deleteDevis($ID);
+        
+    }
 }
 ?>

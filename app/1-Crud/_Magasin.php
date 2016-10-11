@@ -144,7 +144,7 @@ class _Magasin extends DataBaseConnection {
             $request->bindParam(':adressePhysique',$AdressePhysiqueUpdated );
             $request->bindParam(':id',$ID);
             $request->execute();
-            parent::getBdd()->commit();
+            parent::getBdd()->commit(); 
             
             $request->closeCursor();
             

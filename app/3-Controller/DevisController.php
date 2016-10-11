@@ -33,6 +33,14 @@ class DevisController {
     public function updateDevis($DevisObject){
         $this->devisCrud->updateDevis($DevisObject);
     }
+    
+    public function addDevis($DevisObject){
+        $this->devisCrud->addDevis($DevisObject);
+    }
+    
+    public function deleteDevis($DevisObject){
+        $this->devisCrud->deleteDevis($DevisObject);
+    }
 
 }
 

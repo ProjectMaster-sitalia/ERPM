@@ -122,7 +122,7 @@ class _Intervention extends DataBaseConnection {
                 $team = $team->getTeamByID($data['teamID']);
                 $object->setTeam($team);
             }
-            if (isset($data['statusIntervention'])) {
+            if (isset($data['statusIntervention'])) { 
                 $query = "SELECT libelle FROM InterventionStatusDefinition WHERE ID = :id";
                 $request = parent::getBdd()->prepare($query);
                 // MAPPER L'ID
