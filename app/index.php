@@ -75,7 +75,7 @@ require_once '4-Vue/initVue.php';
 //        
 //        
 //        /* DevisLine */
-//        $devisLineComponent->addDevisLineTestVue(1);
+        $devisLineComponent->addDevisLineTestVue(10,1,"description",57,543,18,39,1); 
 //        echo $devisLineComponent->getDevisLineTestVue(1);
 //        $devisLineComponent->updateDevisLineTestVue(1);
 //        $devisLineComponent->deleteDevisLineTestVue(1);

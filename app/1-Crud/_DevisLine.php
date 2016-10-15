@@ -179,6 +179,48 @@ class _DevisLine extends DataBaseConnection {
             $request->bindParam(':typeInterventionID', $typeInterventionIDUpdated);
             $request->bindParam(':id',$ID);
             $request->execute();
+            parent::getBdd()->commit();
+            
+            $request->closeCursor();
+            
+                    } catch (Exception $e) {
+            error_log($e->getMessage());
+        }
+    }
+    
+    function addDevisLine($DevisLineObject){
+        
+         try {
+            // INITIALISER LA CONNEXION BDD
+            if (is_null(parent::getBdd())) {
+                parent::__construct();
+            }
+            if (!parent::getBdd()->inTransaction()) {
+                parent::getBdd()->beginTransaction();
+            }
+            
+            $devisID = $DevisLineObject->getDevis();
+            $description = $DevisLineObject->getDescription();
+            $unite = $DevisLineObject->getUnite();
+            $prixUnitaire = $DevisLineObject->getPrixUnitaire();
+            $quantite = $DevisLineObject->getQuantite();
+            $prixHT = $DevisLineObject->getPrixHT();
+            $typeInterventionID = $DevisLineObject->getTypeIntervention();
+            $ID = $DevisLineObject->getID();
+            
+            //On update la table
+            $query = "INSERT INTO DevisLine(:id,:devisID,:description,:unite,:prixUnitaire,:quantite,:prixHT,typeInterventionID)";
+            $request = parent::getBdd()->prepare($query);
+            $request->bindParam(':devisID', $devisID);
+            $request->bindParam(':description', $description);
+            $request->bindParam(':unite', $unite);
+            $request->bindParam(':prixUnitaire', $prixUnitaire);
+            $request->bindParam(':quantite', $quantite);
+            $request->bindParam(':prixHT', $prixHT);
+            $request->bindParam(':typeInterventionID', $typeInterventionID);
+            $request->bindParam(':id',$ID);
+            $request->execute();
+            parent::getBdd()->commit();
             
             $request->closeCursor();
             

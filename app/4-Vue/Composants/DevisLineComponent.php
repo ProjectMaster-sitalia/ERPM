@@ -33,17 +33,22 @@ class DevisLineComponent {
         if ($this->devisLine) {
             var_dump($this->devisLine);
             $ID = $this->devisLine->getID();
-            $devisID = $this->devisLine->getDevisID();
             $description = $this->devisLine->getDescription();
             $unite = $this->devisLine->getUnite();
             $prixUnitaire = $this->devisLine->getPrixUnitaire();
             $quantite = $this->devisLine->getQuantite();
             $prixHT = $this->devisLine->getPrixHT();
-            $typeInterventionID = $this->devisLine->getTypeInterventionID();
+            
+            $devis = $this->devisLine->getDevis();
+            
+            $typeIntervention = $this->devisLine->getTypeIntervention();
+            
             
             $output = ("<h1>ID DevisLine : $ID</h1>");
-            $output.=("<p>devisID : $devisID</p>");
+            $output.=("<p>unite: $unite</p>");
             $output.=("<p>Description : $description</p>");
+            $output.=("<p>Prix unitaire : $prixUnitaire</p>");
+            $output.=("<p>Quantite : $quantite</p>");
             $output.=("<p>Prix HT : $prixHT</p>");
 
             return $output;
@@ -67,10 +72,27 @@ class DevisLineComponent {
         $DevisLineObject->setPrixHT($prixHT);
         $DevisLineObject->setTypeInterventionID($typeInterventionID);
         
-        $this->devisLine = $this->devisLineController->updateDevisLine($DevisLineObject);
+        $this->devisLineController->updateDevisLine($DevisLineObject);
         
     }
 
-}
 
+
+
+    public function addDevisLineTestVue($ID,$devisId,$description,$unite,$prixUnitaire,$quantite,$prixHT,$typeInterventionID){
+       
+        $DevisLineObject = new DevisLine($ID);
+        $DevisLineObject->setDevisID($devisId);
+        $DevisLineObject->setDescription($description);
+        $DevisLineObject->setUnite($unite);
+        $DevisLineObject->setPrixUnitaire($prixUnitaire);
+        $DevisLineObject->setQuantite($quantite);
+        $DevisLineObject->setPrixHT($prixHT);
+        $DevisLineObject->setTypeInterventionID($typeInterventionID);
+        
+        $this->devisLineController->addDevisLine($DevisLineObject);
+        
+    }
+    
+}
 ?>
