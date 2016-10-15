@@ -14,7 +14,7 @@ require_once '4-Vue/initVue.php';
     <body>
         <?php
         
-        /* Compagnie */
+        /* Compagnie */ 
           //add
 //        $compagnieComponent->addCompagnieTestVue(6,"manager6","libelle6","logo6","adressFacturation6");
 //        //update   
@@ -101,7 +101,7 @@ require_once '4-Vue/initVue.php';
 //        $interventionMediaComponent->deleteInterventionMediaTestVue(1);
 //        /*InterventionMedia*/
 //        
-//        /* InterventionArtisanMedia */  //Probleme : le model Mail doit etre créé
+//        /* InterventionArtisanMedia */  //Probleme : le model Media doit etre créé
 ////        $interventionArtisanMediaComponent->addInterventionArtisanMediaTestVue(1);
 ////        echo $interventionArtisanMediaComponent->getInterventionArtisanMediaTestVue(1);
 ////        $interventionArtisanMediaComponent->updateInterventionArtisanMediaTestVue(1);
