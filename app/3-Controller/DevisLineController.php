@@ -37,6 +37,10 @@ class DevisLineController {
     public function addDevisLine($DevisLineObject){
         $this->DevisLineCrud->addDevisLine($DevisLineObject);
     }
+    
+    public function deleteDevisLine($DevisLineObject){
+        $this->DevisLineCrud->deleteDevisLine($DevisLineObject);
+    }
 
 }
 

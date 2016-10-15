@@ -32,26 +32,26 @@ class DevisLineComponent {
         $this->devisLine = $this->devisLineController->getDevisLineByID($id);
         if ($this->devisLine) {
             var_dump($this->devisLine);
-            $ID = $this->devisLine->getID();
-            $description = $this->devisLine->getDescription();
-            $unite = $this->devisLine->getUnite();
-            $prixUnitaire = $this->devisLine->getPrixUnitaire();
-            $quantite = $this->devisLine->getQuantite();
-            $prixHT = $this->devisLine->getPrixHT();
-            
-            $devis = $this->devisLine->getDevis();
-            
-            $typeIntervention = $this->devisLine->getTypeIntervention();
-            
-            
-            $output = ("<h1>ID DevisLine : $ID</h1>");
-            $output.=("<p>unite: $unite</p>");
-            $output.=("<p>Description : $description</p>");
-            $output.=("<p>Prix unitaire : $prixUnitaire</p>");
-            $output.=("<p>Quantite : $quantite</p>");
-            $output.=("<p>Prix HT : $prixHT</p>");
+//            $ID = $this->devisLine->getID();
+//            $description = $this->devisLine->getDescription();
+//            $unite = $this->devisLine->getUnite();
+//            $prixUnitaire = $this->devisLine->getPrixUnitaire();
+//            $quantite = $this->devisLine->getQuantite();
+//            $prixHT = $this->devisLine->getPrixHT();
+//            
+//            $devis = $this->devisLine->getDevis();
+//            
+//            $typeIntervention = $this->devisLine->getTypeIntervention();
+//            
+//            
+//            $output = ("<h1>ID DevisLine : $ID</h1>");
+//            $output.=("<p>unite: $unite</p>");
+//            $output.=("<p>Description : $description</p>");
+//            $output.=("<p>Prix unitaire : $prixUnitaire</p>");
+//            $output.=("<p>Quantite : $quantite</p>");
+//            $output.=("<p>Prix HT : $prixHT</p>");
 
-            return $output;
+//            return $output;
         }
         else
             return null;
@@ -64,13 +64,13 @@ class DevisLineComponent {
     public function updateDevisLineTestVue($ID,$devisId,$description,$unite,$prixUnitaire,$quantite,$prixHT,$typeInterventionID){
        
         $DevisLineObject = new DevisLine($ID);
-        $DevisLineObject->setDevisID($devisId);
+        $DevisLineObject->setDevis($devisId);
         $DevisLineObject->setDescription($description);
         $DevisLineObject->setUnite($unite);
         $DevisLineObject->setPrixUnitaire($prixUnitaire);
         $DevisLineObject->setQuantite($quantite);
         $DevisLineObject->setPrixHT($prixHT);
-        $DevisLineObject->setTypeInterventionID($typeInterventionID);
+        $DevisLineObject->setTypeIntervention($typeInterventionID);
         
         $this->devisLineController->updateDevisLine($DevisLineObject);
         
@@ -82,15 +82,21 @@ class DevisLineComponent {
     public function addDevisLineTestVue($ID,$devisId,$description,$unite,$prixUnitaire,$quantite,$prixHT,$typeInterventionID){
        
         $DevisLineObject = new DevisLine($ID);
-        $DevisLineObject->setDevisID($devisId);
+        $DevisLineObject->setDevis($devisId);
         $DevisLineObject->setDescription($description);
         $DevisLineObject->setUnite($unite);
         $DevisLineObject->setPrixUnitaire($prixUnitaire);
         $DevisLineObject->setQuantite($quantite);
         $DevisLineObject->setPrixHT($prixHT);
-        $DevisLineObject->setTypeInterventionID($typeInterventionID);
+        $DevisLineObject->setTypeIntervention($typeInterventionID);
         
         $this->devisLineController->addDevisLine($DevisLineObject);
+        
+    }
+    
+    public function deleteDevisLineTestVue($ID){
+        
+        $this->devisLineController->deleteDevisLine($ID);
         
     }
     

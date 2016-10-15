@@ -16,7 +16,7 @@ require_once '4-Vue/initVue.php';
         
         /* Compagnie */
           //add
-//        $compagnieComponent->addCompagnieTestVue(1,"manager1","libelle1","logo1","adressFacturation1");
+//        $compagnieComponent->addCompagnieTestVue(6,"manager6","libelle6","logo6","adressFacturation6");
 //        //update   
 //        echo $compagnieComponent->getCompagnieTestVue(1);
 //        $compagnieComponent->updateCompagnieTestVue(1,"manager18","libelle18","logo18","adressFacturation18");
@@ -68,18 +68,17 @@ require_once '4-Vue/initVue.php';
 //        echo $devisComponent->getDevisTestVue(5);
 //        $devisComponent->deleteDevisTestVue(6);
 //        /*Devis*/
+//          
+//        /* DevisLine */
+//        $devisLineComponent->addDevisLineTestVue(5,1,"description",57,82,18,39,1); 
+//        echo $devisLineComponent->getDevisLineTestVue(1);
+//        $devisLineComponent->updateDevisLineTestVue(4,2,"description4",63,47,41,89,2);
+//        $devisLineComponent->deleteDevisLineTestVue(5);
+//        /*DevisLine*/
 //        
 //        
 //        //        Tout est fait et testé jusqu'ici
 //        
-//        
-//        
-//        /* DevisLine */
-        $devisLineComponent->addDevisLineTestVue(10,1,"description",57,543,18,39,1); 
-//        echo $devisLineComponent->getDevisLineTestVue(1);
-//        $devisLineComponent->updateDevisLineTestVue(1);
-//        $devisLineComponent->deleteDevisLineTestVue(1);
-//        /*DevisLine*/
 //        
 //        /* InterventionMails */
 //        $interventionMailsComponent->addInterventionMailsTestVue(1);
@@ -122,42 +121,7 @@ require_once '4-Vue/initVue.php';
 //        $wikiComponent->updateWikiTestVue(1);
 //        $wikiComponent->deleteWikiTestVue(1);
 //        /*Wiki*/
-
-//        echo $teamComponent->getTeamTestVue(1);
-//        $teamComponent->updateTeamTestVue(1,2,"userUpdated3","passwordUpdated3");
-//        echo $teamComponent->getTeamTestVue(1);
         
-//        echo $compagnieComponent->getCompagnieTestVue(1);
-//        $compagnieComponent->updateCompagnieTestVue(1,"managerUpdated","libelleUpdated","logoUpdated","adresseFacturationUpdated");
-//        echo $compagnieComponent->getCompagnieTestVue(1);
-        
-//        echo $devisComponent->getDevisTestVue(1);
-//        $devisComponent->updateDevisTestVue(1,2,3,1);
-//        echo $devisComponent->getDevisTestVue(1);
-
-//          echo $devisLineComponent->getDevisLineTestVue(1);
-//          $devisLineComponent->updateDevisLineTestVue(1,2,"description",20,3,250,842,3);
-//          echo $devisLineComponent->getDevisLineTestVue(1);
-//          
-
-//          echo $magasinComponent->getmagasinTestVue(1);
-//          $magasinComponent->updatemagasinTestVue(1,"adressFact1",2,"adressePhhysique1");
-//          echo $magasinComponent->getmagasinTestVue(1);
-          
-        //$teamComponent->deleteTeamTestVue();
-//        $affilieComponent->deleteAffilieTestVue(1);
-        //$compagnieComponent->deleteCompagnieTestVue();
-//        $facturationArtisanComponent->deleteFacturationArtisanTestVue(1);
-//        $interventionComponent->deleteInterventionTestVue();
-//        $magasinComponent->deleteMagasinTestVue(1);
-//        $mailsComponent->deleteMailsTestVue(1);
-//        $mediaComponent->deleteMediaTestVue(1);
-//        $nAffilieComponent->deleteNAffilieTestVue(1);
-//        $teamComponent->deleteTeamTestVue(1);
-//        $typeCompteComponent->deleteTypeCompteTestVue(1);
-//        $typeInterventionComponent->deleteTypeInterventionTestVue(1);
-//        $devisComponent->deleteDevisTestVue(1);
-//        $devisLineComponent->deleteDevisLineTestVue(1);
         ?>
     </body>
 </html>

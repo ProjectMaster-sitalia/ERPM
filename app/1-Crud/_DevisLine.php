@@ -94,24 +94,17 @@ class _DevisLine extends DataBaseConnection {
             $data = $request->fetch();
             //INSTENTIER L'OBJET
             $object = new DevisLine($data['ID']);
-//            if (isset($data['typeCompteID'])) {
-//                $typeCompte = new _TypeCompte();
-//                $typeCompte = $typeCompte->getTypeCompteByID($data['typeCompteID']);
-//                $object->setTypeCompte($typeCompte);
-                
-//                $object->setTypeCompte($data['typeCompteID']);
-//                $query = "SELECT libelle FROM TypeCompte WHERE ID = :id";
-//                $request = parent::getBdd()->prepare($query);
-//                $request->bindParam(':id', $data['typeCompteID']);
-//                $request->execute();
-//                $data = $request->fetch();
-//            }
 
             if (isset($data['devisID'])) {
-                $object->setDevisID($data['devisID']);
+                $objectDevis = new _Devis();
+                $objectDevis = $objectDevis->getDevisByID($data['devisID']);
+                $object->setDevis($objectDevis);
             }
             if (isset($data['description'])) {
                 $object->setDescription($data['description']);
+            }
+            if (isset($data['unite'])) {
+                $object->setUnite($data['unite']);
             }
             if (isset($data['prixUnitaire'])) {
                 $object->setPrixUnitaire($data['prixUnitaire']);
@@ -123,7 +116,12 @@ class _DevisLine extends DataBaseConnection {
                 $object->setPrixHT($data['prixHT']);
             }
             if (isset($data['typeInterventionID'])) {
-                $object->setTypeInterventionID($data['typeInterventionID']);
+                $query = "SELECT libelle FROM DevisTypeInterventionDefinition WHERE ID = :id";
+                $request = parent::getBdd()->prepare($query);
+                $request->bindParam(':id', $data['typeInterventionID']);
+                $request->execute();
+                $data2 = $request->fetch();
+                $object->setTypeIntervention($data2['libelle']);
             }
 
             $request->closeCursor();
@@ -145,30 +143,17 @@ class _DevisLine extends DataBaseConnection {
                 parent::getBdd()->beginTransaction();
             }
             
-
-            // PREPARER LA SQL QUERY
-            //On récupere l'id du libelle dans la table TypeCompte
-//            $query = "SELECT libelle FROM TypeCompteDefinition WHERE ID = :typeCompte";
-//            $request = parent::getBdd()->prepare($query);
-//            $request->bindParam(':typeCompte', $newTypeCompte);
-//            $request->execute();
-//            $newTypeCompteLibelle = $request->fetch();
-//            $newTypeCompteLibelle = $newTypeCompteLibelle['libelle'];
-            
-//            $request->closeCursor();
-            //echo $newTypeCompte;
-            
-            $devisIDUpdated = $DevisLineObject->getDevisID();
+            $devisIDUpdated = $DevisLineObject->getDevis();
             $descriptionUpdated = $DevisLineObject->getDescription();
             $uniteUpdated = $DevisLineObject->getUnite();
             $prixUnitaireUpdated = $DevisLineObject->getPrixUnitaire();
             $quantiteUpdated = $DevisLineObject->getQuantite();
             $prixHTUpdated = $DevisLineObject->getPrixHT();
-            $typeInterventionIDUpdated = $DevisLineObject->getTypeInterventionID();
+            $typeInterventionIDUpdated = $DevisLineObject->getTypeIntervention();
             $ID = $DevisLineObject->getID();
             
             //On update la table
-            $query = "UPDATE DevisLine SET devisID = :devisID,description = :description,unite = :unite, prixUnitaire = : prixUnitaire, quantite = :quantite, prixHT = :prixHT, typeInterventionID = :typeInterventionID WHERE ID = :id";
+            $query = "UPDATE DevisLine SET devisID = :devisID,description = :description,unite = :unite, prixUnitaire = :prixUnitaire, quantite = :quantite, prixHT = :prixHT, typeInterventionID = :typeInterventionID WHERE ID = :id";
             $request = parent::getBdd()->prepare($query);
             $request->bindParam(':devisID', $devisIDUpdated);
             $request->bindParam(':description', $descriptionUpdated);
@@ -209,7 +194,7 @@ class _DevisLine extends DataBaseConnection {
             $ID = $DevisLineObject->getID();
             
             //On update la table
-            $query = "INSERT INTO DevisLine(:id,:devisID,:description,:unite,:prixUnitaire,:quantite,:prixHT,typeInterventionID)";
+            $query = "INSERT INTO DevisLine VALUES(:id,:devisID,:description,:unite,:prixUnitaire,:quantite,:prixHT,:typeInterventionID)";
             $request = parent::getBdd()->prepare($query);
             $request->bindParam(':devisID', $devisID);
             $request->bindParam(':description', $description);
@@ -218,6 +203,32 @@ class _DevisLine extends DataBaseConnection {
             $request->bindParam(':quantite', $quantite);
             $request->bindParam(':prixHT', $prixHT);
             $request->bindParam(':typeInterventionID', $typeInterventionID);
+            $request->bindParam(':id',$ID);
+            $request->execute();
+            parent::getBdd()->commit();
+            
+            $request->closeCursor();
+            
+                    } catch (Exception $e) {
+            error_log($e->getMessage());
+        }
+    }
+    
+    function deleteDevisLine($ID){
+        
+         try {
+            // INITIALISER LA CONNEXION BDD
+            if (is_null(parent::getBdd())) {
+                parent::__construct();
+            }
+            if (!parent::getBdd()->inTransaction()) {
+                parent::getBdd()->beginTransaction();
+            }
+            
+            
+            //On supprime la table
+            $query = "DELETE FROM DevisLine WHERE ID = :id";
+            $request = parent::getBdd()->prepare($query);
             $request->bindParam(':id',$ID);
             $request->execute();
             parent::getBdd()->commit();
